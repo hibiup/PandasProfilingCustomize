@@ -6,6 +6,13 @@ import pandas_profiling
 from PandasProfileCustomization import deco_reporter, customize_template, template_mapper
 
 
+def reporting(df, output):
+    """ Profiling method """
+    rep = df.profile_report(style={'full_width': True})
+    # display(profile)  # For Jupyter notebook
+    output(rep)
+
+
 class ReportTest(TestCase):
     def test_report_generation(self):
         """ 修改 Templates """
@@ -47,6 +54,7 @@ class ReportTest(TestCase):
         deco_reporter(df, input_callback, output_callback)
 
         """ 执行测试报告 """
-        rep = df.profile_report(style={'full_width': True})
-        # display(profile)  # For Jupyter notebook
-        rep.to_file("output.html")
+        from concurrent import futures
+        with futures.ProcessPoolExecutor(5) as executor:
+            done = executor.submit(reporting(tmp_df, lambda out: out.to_file("output.html")))
+            futures.as_completed(done)
