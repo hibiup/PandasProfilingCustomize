@@ -56,5 +56,5 @@ class ReportTest(TestCase):
         """ 执行测试报告 """
         from concurrent import futures
         with futures.ProcessPoolExecutor(5) as executor:
-            done = executor.submit(reporting(tmp_df, lambda out: out.to_file("output.html")))
+            done = executor.submit(reporting(df, lambda out: out.to_file("output.html")))
             futures.as_completed(done)
