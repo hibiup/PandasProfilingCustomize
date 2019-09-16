@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import pandas_profiling
 
-from ProfileReportCustomizer import deco_reporter, customize_template, template_mapper
+from PandasProfileCustomization import deco_reporter, customize_template, template_mapper
 
 
 class ReportTest(TestCase):
