@@ -8,9 +8,9 @@ from PandasProfileCustomization import deco_reporter, customize_template, templa
 
 def reporting(df, output):
     """ Profiling method """
-    rep = df.profile_report(style={'full_width': True})
+    profile = df.profile_report(style={'full_width': True})
     # display(profile)  # For Jupyter notebook
-    output(rep)
+    output(profile)
 
 
 class ReportTest(TestCase):
